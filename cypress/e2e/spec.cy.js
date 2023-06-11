@@ -1,4 +1,5 @@
 import PracticeFormPage from "../pageObjects/PracticeForm.page";
+import ValidationPage from "../pageObjects/Validation.page";
 
 describe('ToolsQA', () => {
   it('Practice Form', () => {
@@ -9,7 +10,7 @@ describe('ToolsQA', () => {
     PracticeFormPage.lastName.type("Doe");
     PracticeFormPage.email.type("test@test.com");
     //Select other for gender 
-    PracticeFormPage.genderOther.click({ force: true });
+    PracticeFormPage.genderOther.click();
     PracticeFormPage.mobileNumber.type("1234567890");
     //Set the - Date of Birth - with Calendar widget to - 28th of February, 1930. Date selecting should be dynamic 
     PracticeFormPage.dateOfBirth.click();
@@ -17,19 +18,29 @@ describe('ToolsQA', () => {
     PracticeFormPage.yearSelector.select("1930");
     PracticeFormPage.twentyEightdaySelector.click();
     //Set Subjects to Economics.
-    PracticeFormPage.subject.type("Economics");
+    PracticeFormPage.subject.type("Economics{enter}");
     //Set Hobbies to Music.
-    PracticeFormPage.hobbiesMusic.click({ force: true });
+    PracticeFormPage.hobbiesMusic.click();
     //Upload an image of your choice.
-    //Create folder “files” and put the image there
-    //Might come in handy: https://docs.cypress.io/api/commands/selectfile
-    PracticeFormPage.uploadPicture.attachFile("files\\test.png");
-    //Set State to NCR.
+    PracticeFormPage.uploadPicture.selectFile("./cypress/files/test.jpg");
+    //Set address
+    PracticeFormPage.currentAddress.type("Test Address");
+    //Set State to NCR 
+    PracticeFormPage.state.type("NCR{enter}");
     //Set City to Delhi.
+    PracticeFormPage.city.type("Delhi{enter}");
     //Click Submit.
+    PracticeFormPage.submit.click();
     //Validate that each Labeled row contains the correct information.
-    //Create the necessary elements, page objects, etc.
-    //Do as much as you can, the best way you can.
-    //You can use everything, except other people
+    ValidationPage.firstNameLabel.should("have.text", "John Doe");
+    ValidationPage.emailLabel.should("have.text", "test@test.com");
+    ValidationPage.genderLabel.should("have.text", "Other");
+    ValidationPage.mobileLabel.should("have.text", "1234567890");
+    ValidationPage.dobLabel.should("have.text", "28 February,1930");
+    ValidationPage.subjectLabel.should("have.text", "Economics");
+    ValidationPage.hobbiesLabel.should("have.text", "Music");
+    ValidationPage.pictureLabel.should("have.text", "test.jpg");
+    ValidationPage.addressLabel.should("have.text", "Test Address");
+    ValidationPage.stateAndCityLabel.should("have.text", "NCR Delhi");
   })
 })

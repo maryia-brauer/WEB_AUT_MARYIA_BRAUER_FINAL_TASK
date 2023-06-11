@@ -1,9 +1,9 @@
-class PracticeFormPage {
+import BasePage from "./Base.page";
+
+class PracticeFormPage extends BasePage {
+
     static get url() {
         return "/automation-practice-form";
-    }
-    static visit() {
-        cy.visit(this.url);
     }
 
     static get firstName() {
@@ -19,7 +19,7 @@ class PracticeFormPage {
     }
 
     static get genderOther() {
-        return cy.get("#gender-radio-3");
+        return cy.get('[for="gender-radio-3"]');
     }
 
     static get mobileNumber() {
@@ -47,12 +47,29 @@ class PracticeFormPage {
     }
 
     static get hobbiesMusic() {
-        return cy.get("#hobbies-checkbox-3");
+        return cy.get('[for="hobbies-checkbox-3"]');
     }
 
     static get uploadPicture() {
         return cy.get("#uploadPicture");
     }
+
+    static get currentAddress() {
+        return cy.get("#currentAddress");
+    }
+
+    static get state() {
+        return cy.get("#state");
+    }
+
+    static get city() {
+        return cy.get("#city");
+    }
+
+    static get submit() {
+        return cy.get("#submit");
+    }
+
 }
 
 export default PracticeFormPage;

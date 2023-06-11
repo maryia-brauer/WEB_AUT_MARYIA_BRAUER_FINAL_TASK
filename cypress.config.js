@@ -6,8 +6,8 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
     chromeWebSecurity: false,
-    viewportWidth: 1440,
-    viewportHeight: 900,
+    viewportWidth: 1800,
+    viewportHeight: 1200,
     baseUrl: "https://demoqa.com",
   },
 });
